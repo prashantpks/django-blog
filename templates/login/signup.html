@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Register</title>
+  <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{% static 'assets/css/login.css' %}">
+</head>
+<body>
+    
+  <main>
+    <div class="container-fluid">
+        
+      <div class="row">
+        
+        <div class="col-sm-6 login-section-wrapper">
+            <div class="brand-wrapper">
+                <!-- <img src="assets/images/logo.svg" alt="logo" class="logo"> -->
+                <h1 class="login-title"><a href="{% url 'home' %}" style="text-decoration: none;">Bloggerz.</a></h1>
+              </div>
+              {% include 'includes/messages.html' %}
+
+          <div class="login-wrapper my-auto">
+            <h2 class="login-title">Sign up</h2>
+            <form action="{% url 'signup' %}" method="POST">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label for="firstname">First Name</label>
+                        <input type="text" name="firstname" id="firstname" class="form-control" placeholder="Fisrt Name" required>
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="lastname">Last Name</label>
+                        <input type="text" name="lastname" id="lastname" class="form-control" placeholder="Last Name" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="username" class="form-control" placeholder="Username" required>
+                </div>
+
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" class="form-control" placeholder="email@example.com" required>
+              </div>
+              <div class="row">
+                <div class="form-group mb-4 col-6">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" class="form-control" placeholder="" required>
+                  </div>
+                  <div class="form-group mb-4 col-6">
+                    <label for="password">Confirm Password</label>
+                    <input type="password" name="confirm_password" id="confirm-password" class="form-control" placeholder="" required>
+                  </div>
+              </div>
+              
+              <input name="submit" id="submit" class="btn btn-block login-btn" type="submit" value="Register">
+            </form>
+            <p class="login-wrapper-footer-text">Already have an account? <a href="{% url 'login' %}" class="text-reset">Login here</a></p>
+          </div>
+        </div>
+        <div class="col-sm-6 px-0 d-none d-sm-block">
+          <img src="{% static 'assets/images/login.jpg' %}" alt="login image" class="login-img">
+        </div>
+      </div>
+    </div>
+  </main>
+
+ 
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>

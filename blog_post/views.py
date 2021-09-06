@@ -4,3 +4,6 @@ from django.shortcuts import render
 # Create your views here.
 def home(request):
     return render(request,'blog_post/home.html')
+
+def mybloglist(request):
+    return render(request,'blog_post/my_blog_list.html')
