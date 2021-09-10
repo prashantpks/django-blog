@@ -41,6 +41,7 @@
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
+                <a class="dropdown-item" href="{% url 'myblog' %}">My Blogs</a>
                 <a class="dropdown-item" href="{% url 'pass_change' %}">Change Password</a>
                 <a class="dropdown-item" href="javascript:{document.getElementById('logout').submit()} ">Logout
                   <form  action = "{% url 'logout' %}" id = "logout" method="POST">

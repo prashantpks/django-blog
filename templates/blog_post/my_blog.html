@@ -6,7 +6,7 @@
 <section class="featured-posts no-padding-top">
     <div class="container">
       <!-- Post-->
-      {% for blog in blogs %}
+      {% for blog in user.post_author.all %}
       <div class="row d-flex align-items-stretch">
         <div class="text col-lg-7">
           <div class="text-inner d-flex align-items-center">
@@ -21,9 +21,15 @@
                 line-height: 60px;
                 background: #111;
                 border: 1px solid #111;
-                color: #fff;">Read More</button></a> </p>
+                color: #fff;">Read More</button></a> 
+                <a href="{% url 'editblog' pk=blog.pk %}"><button type="submit" class="submit mb-4 mt-4" style=" height: 60px;
+                  padding: 0 30px;
+                  line-height: 60px;
+                  background: #111;
+                  border: 1px solid #111;
+                  color: #fff;">Edit</button></a> </p>
               <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
-                  <div class="avatar"><img src="{{blog.author.user_profile.profile_pic.url }}" alt="..." class="img-fluid"></div>
+                  <div class="avatar"><img src="{{ user.user_profile.profile_pic.url }}" alt="..." class="img-fluid"></div>
                   <div class="title"><span>{{ blog.author }}</span></div></a>
                 <div class="date"><i class="icon-clock"></i> {{ blog.update_date }}</div>
                 <div class="comments"><i class="icon-comment"></i>{{ blog.blog_comment.count }}</div>

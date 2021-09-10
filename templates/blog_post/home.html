@@ -39,7 +39,7 @@
             </header>
             <p>{{ post.blog_content|range_filter|linebreaks }}</p>
             <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
-                <div class="avatar"><img src="{% static 'img/avatar-1.jpg' %}" alt="..." class="img-fluid"></div>
+                <div class="avatar"><img src="{{ post.author.user_profile.profile_pic.url }}" alt="..." class="img-fluid"></div>
                 <div class="title"><span>{{ post.author }}</span></div></a>
               <div class="date"><i class="icon-clock"></i> {{ post.update_date }}</div>
               <div class="comments"><i class="icon-comment"></i>{{ post.blog_comment.count}}</div>
@@ -62,7 +62,7 @@
             </header>
             <p>{{ post.blog_content|range_filter|linebreaks }}</p>
             <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
-                <div class="avatar"><img src="img/avatar-2.jpg" alt="..." class="img-fluid"></div>
+                <div class="avatar"><img src="{{ post.author.user_profile.profile_pic.url }}" alt="..." class="img-fluid"></div>
                 <div class="title"><span>{{ post.author }}</span></div></a>
               <div class="date"><i class="icon-clock"></i> {{ post.update_date }}</div>
               <div class="comments"><i class="icon-comment"></i>{{ post.blog_comment.count}}</div>

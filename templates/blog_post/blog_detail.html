@@ -12,10 +12,10 @@
               
               <h1>{{blog.blog_title }}</h1>
               <div class="post-footer d-flex align-items-center flex-column flex-sm-row"><a href="#" class="author d-flex align-items-center flex-wrap">
-                <!-- <div class="avatar"><img src="{{ blog.author.post_author.profile_pic.url }}" alt="..." class="img-fluid"></div> -->
-                  <div class="title"><i class="fa fa-pencil" aria-hidden="true"></i><span>{{ blog.author }}</span></div></a>
+                <div class="avatar"><img src="{{ blog.author.user_profile.profile_pic.url }}" alt="..." class="img-fluid"></div>
+                  <div class="title"><span>{{ blog.author }}</span></div></a>
                 <div class="d-flex align-items-center flex-wrap">       
-                  <div class="date ml-2 mr-3"><i class="icon-clock"></i> Published Date: {{ blog.publish_date }}</div>
+                  <div class="date"><i class="icon-clock"></i> Published Date: {{ blog.publish_date }}</div>
                   <div class="date"> Udated At: {{ blog.update_date}}</div>
                   
                   <div class="comments meta-last"><i class="icon-comment"></i>{{ comment_data.count }}</div>
@@ -92,11 +92,11 @@
           <header>
             <h3 class="h6">Latest Posts</h3>
           </header>
-          <div class="blog-posts">
+          <div class="blog-posts mb-3">
               {% for post in latest_post %}
               <a href="{% url 'blog_detail' slug=post.slug %}">
               <div class="item d-flex align-items-center">
-                <!-- <div class="image"><img src="img/small-thumbnail-1.jpg" alt="..." class="img-fluid"></div> -->
+                <div class="image"><img src="{{post.author.user_profile.profile_pic.url }}" alt="..." class="img-fluid rounded-circle"></div>
                 <div class="title"><strong>{{ post.blog_title }}</strong>
                   <div class="d-flex align-items-center">
                     <div class="comments"><i class="fa fa-pencil" aria-hidden="true"></i> {{ post.author}}| </div>

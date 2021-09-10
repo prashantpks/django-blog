@@ -65,3 +65,17 @@ def blog_detail(request,slug):
         'latest_post': latest_post,  
     }
     return render(request,'blog_post/blog_detail.html',data)
+
+
+class MyBlog(LoginRequiredMixin,TemplateView):
+    template_name = 'blog_post/my_blog.html'
+
+
+class UpdateBlog(LoginRequiredMixin,UpdateView):
+    model = Blog
+    fields = ('blog_title','blog_content','blog_image',)
+    template_name = 'blog_post/edit_blog.html'
+
+    # Redirect after updating
+    def get_success_url(self,**kwargs):
+        return  reverse_lazy('blog_detail',kwargs = {'slug': self.object.slug})
