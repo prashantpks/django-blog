@@ -2,7 +2,7 @@
 
  {% block content %}
  {% load static %}
- 
+ {% load custom_filters %}
  <!-- Hero Section-->
  <section style="background: url({% static 'img/hero.jpg' %}); background-size: cover; background-position: center center;" class="hero">
   <div class="container">
@@ -27,126 +27,75 @@
 <section class="featured-posts no-padding-top">
   <div class="container">
     <!-- Post-->
+    {%  for post in latest_post %}
+      {% if forloop.counter|divisibleby:2 %}
     <div class="row d-flex align-items-stretch">
       <div class="text col-lg-7">
         <div class="text-inner d-flex align-items-center">
           <div class="content">
             <header class="post-header">
-              <div class="category"><a href="#">Business</a><a href="#">Technology</a></div><a href="post.html">
-                <h2 class="h4">Alberto Savoia Can Teach You About Interior</h2></a>
+              <a href="{% url 'blog_detail' slug=post.slug %}">
+                <h2 class="h4">{{ post.blog_title }}</h2></a>
             </header>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrude consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+            <p>{{ post.blog_content|range_filter|linebreaks }}</p>
             <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
                 <div class="avatar"><img src="{% static 'img/avatar-1.jpg' %}" alt="..." class="img-fluid"></div>
-                <div class="title"><span>John Doe</span></div></a>
-              <div class="date"><i class="icon-clock"></i> 2 months ago</div>
-              <div class="comments"><i class="icon-comment"></i>12</div>
+                <div class="title"><span>{{ post.author }}</span></div></a>
+              <div class="date"><i class="icon-clock"></i> {{ post.update_date }}</div>
+              <div class="comments"><i class="icon-comment"></i>{{ post.blog_comment.count}}</div>
             </footer>
           </div>
         </div>
       </div>
-      <div class="image col-lg-5"><img src="img/featured-pic-1.jpeg" alt="..."></div>
+      <div class="image col-lg-5"><img src="{{ post.blog_image.url }}" alt="..."></div>
     </div>
+    {% else %}
     <!-- Post        -->
     <div class="row d-flex align-items-stretch">
-      <div class="image col-lg-5"><img src="img/featured-pic-2.jpeg" alt="..."></div>
+      <div class="image col-lg-5"><img src="{{ post.blog_image.url }}" alt="..."></div>
       <div class="text col-lg-7">
         <div class="text-inner d-flex align-items-center">
           <div class="content">
             <header class="post-header">
-              <div class="category"><a href="#">Business</a><a href="#">Technology</a></div><a href="post.html">
-                <h2 class="h4">Alberto Savoia Can Teach You About Interior</h2></a>
+              <a href="{% url 'blog_detail' slug=post.slug %}">
+                <h2 class="h4">{{ post.blog_title }}</h2></a>
             </header>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrude consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+            <p>{{ post.blog_content|range_filter|linebreaks }}</p>
             <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
                 <div class="avatar"><img src="img/avatar-2.jpg" alt="..." class="img-fluid"></div>
-                <div class="title"><span>John Doe</span></div></a>
-              <div class="date"><i class="icon-clock"></i> 2 months ago</div>
-              <div class="comments"><i class="icon-comment"></i>12</div>
+                <div class="title"><span>{{ post.author }}</span></div></a>
+              <div class="date"><i class="icon-clock"></i> {{ post.update_date }}</div>
+              <div class="comments"><i class="icon-comment"></i>{{ post.blog_comment.count}}</div>
             </footer>
           </div>
         </div>
       </div>
     </div>
+    {% endif %}
     <!-- Post                            -->
-    <div class="row d-flex align-items-stretch">
-      <div class="text col-lg-7">
-        <div class="text-inner d-flex align-items-center">
-          <div class="content">
-            <header class="post-header">
-              <div class="category"><a href="#">Business</a><a href="#">Technology</a></div><a href="post.html">
-                <h2 class="h4">Alberto Savoia Can Teach You About Interior</h2></a>
-            </header>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrude consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
-            <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
-                <div class="avatar"><img src="img/avatar-3.jpg" alt="..." class="img-fluid"></div>
-                <div class="title"><span>John Doe</span></div></a>
-              <div class="date"><i class="icon-clock"></i> 2 months ago</div>
-              <div class="comments"><i class="icon-comment"></i>12</div>
-            </footer>
-          </div>
-        </div>
-      </div>
-      <div class="image col-lg-5"><img src="img/featured-pic-3.jpeg" alt="..."></div>
-    </div>
+    {% endfor %}
   </div>
+  <center><a href="{% url 'my_blog_list' %}"><button type="submit" class="submit mb-4 mt-4" style=" height: 60px;
+              padding: 0 30px;
+              line-height: 60px;
+              background: #111;
+              border: 1px solid #111;
+              color: #fff;">Load More</button></a></center>
 </section>
 <!-- Divider Section-->
 <section style="background: url({% static 'img/divider-bg.jpg' %}); background-size: cover; background-position: center bottom;" class="divider">
   <div class="container">
     <div class="row">
       <div class="col-md-7">
-        <h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</h2><a href="#" class="hero-link">View More</a>
+        <h2>“Kindness in words creates confidence. Kindness in thinking creates profundity. Kindness in giving creates love.” - Lao Tzu</h2><a href="#" class="hero-link">View More</a>
       </div>
     </div>
   </div>
 </section>
 <!-- Latest Posts -->
-<section class="latest-posts"> 
-  <div class="container">
-    <header> 
-      <h2>Latest from the bloggerz</h2>
-      <p class="text-big">Some of the Latest Blogs</p>
-    </header>
-    <div class="row">
-      <div class="post col-md-4">
-        <div class="post-thumbnail"><a href="post.html"><img src="img/blog-1.jpg" alt="..." class="img-fluid"></a></div>
-        <div class="post-details">
-          <div class="post-meta d-flex justify-content-between">
-            <div class="date">20 May | 2016</div>
-            <div class="category"><a href="#">Business</a></div>
-          </div><a href="post.html">
-            <h3 class="h4">Ways to remember your important ideas</h3></a>
-          <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
-        </div>
-      </div>
-      <div class="post col-md-4">
-        <div class="post-thumbnail"><a href="post.html"><img src="img/blog-2.jpg" alt="..." class="img-fluid"></a></div>
-        <div class="post-details">
-          <div class="post-meta d-flex justify-content-between">
-            <div class="date">20 May | 2016</div>
-            <div class="category"><a href="#">Technology</a></div>
-          </div><a href="post.html">
-            <h3 class="h4">Diversity in Engineering: Effect on Questions</h3></a>
-          <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
-        </div>
-      </div>
-      <div class="post col-md-4">
-        <div class="post-thumbnail"><a href="post.html"><img src="img/blog-3.jpg" alt="..." class="img-fluid"></a></div>
-        <div class="post-details">
-          <div class="post-meta d-flex justify-content-between">
-            <div class="date">20 May | 2016</div>
-            <div class="category"><a href="#">Financial</a></div>
-          </div><a href="post.html">
-            <h3 class="h4">Alberto Savoia Can Teach You About Interior</h3></a>
-          <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+
 <!-- Newsletter Section-->
-<section class="newsletter no-padding-top">    
+<section class="newsletter mt-3">    
   <div class="container">
     <div class="row">
       <div class="col-md-6">

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+{% load static %}
+
+
+<div class="container">
+<h1 class="mt-5 mb-5">Update Your Profile Picture </h1>
+
+{% include 'includes/messages.html' %}
+    
+    <div class="col-md-8">
+        <div class="form-holder">
+          <form  method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+
+                {{ form|crispy }}
+                {% csrf_token %}
+              <button type="submit" class="submit mb-4 mt-4" style=" height: 60px;
+              padding: 0 30px;
+              line-height: 60px;
+              background: #111;
+              border: 1px solid #111;
+              color: #fff;">Upload Photo</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+</div>
+
+{% endblock %}

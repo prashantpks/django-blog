@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="container">
+<h1 class="mt-5 mb-5">Your Profile </h1>
+{% include 'includes/messages.html' %}
+<div class="container-fluid mb-3">
+    <div class="row">
+        <div class="col-2">
+    {% if user.user_profile %}
+    <img src="/media/{{user.user_profile.profile_pic}}"  width="120" class="rounded-circle">
+    <a href="{% url 'change_pro_pic' %}"><button type="button" class="btn btn-outline-dark">Change Photo</button></a>
+    {% else %}
+    <img src="/media/default-pic.jpg" width="120" class="rounded-circle"/>
+    <a href="{% url 'add_pro_pic' %}"><button type="button" class="btn btn-outline-dark">Change Photo</button></a>
+    {% endif %}
+        </div>
+    </div>
+    
+</div>
+
+<p>Username: {{ user.username }}</p>
+<p>Name: {{user.first_name}} {{user.last_name }}</p>
+<p>Email: {{ user.email }}</p>
+<a href = "{% url 'change_profile' %}"><button class="submit mb-5" style=" height: 60px;
+              padding: 0 30px;
+              line-height: 60px;
+              background: #111;
+              border: 1px solid #111;
+              color: #fff;" >Update profile</button></a>
+</div>
+
+{% endblock %}

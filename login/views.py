@@ -1,7 +1,10 @@
+from django.http import request
 from django.shortcuts import render,redirect
 from django.contrib import messages,auth
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from .forms import UserProfileChange, ProfilePic
 
 # Create your views here.
 
@@ -56,10 +59,86 @@ def signup(request):
 
     return render(request,'login/signup.html')
 
-
+@login_required
 def logout(request):
     if request.method == 'POST':
         auth.logout(request)
         return redirect('home')
     
     return redirect('home')
+
+@login_required
+def profile(request):
+    return render(request,'login/profile.html')
+
+@login_required
+def user_change(request):
+    current_user = request.user
+    form = UserProfileChange(instance = current_user)
+    if request.method == 'POST':
+        form = UserProfileChange(request.POST, instance = current_user)
+        if form.is_valid():
+            form.save()
+            form = UserProfileChange(instance = current_user)
+            messages.success(request,'Profile Info Updated!')
+            return redirect('profile')
+
+        else:
+            messages.error((request,'Invalid Data Entered!'))
+            redirect('change_profile')
+    
+    data = {
+        'form':form,
+    }
+
+    return render(request,'login/change_profile.html',data)
+
+@login_required
+def pass_change(request):
+    current_user = request.user
+    form = PasswordChangeForm(current_user)
+    if request.method == 'POST':
+        form = PasswordChangeForm(current_user,data = request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request,'Password Changed Successfully!')
+            
+    
+    data = {
+        'form':form,
+    }
+    return render(request,'login/pass_change.html', data)
+
+
+@login_required
+def add_pro_pic(request):
+    form = ProfilePic()
+
+    if request.method == 'POST':
+        form = ProfilePic(request.POST, request.FILES)
+        if form.is_valid():
+            user_obj = form.save(commit=False)
+            user_obj.user = request.user
+            user_obj.save()
+            return redirect('profile')
+
+    data = {
+        'form':form,
+    }
+    return render(request,'login/add_pro_pic.html',data)
+
+
+@login_required
+def change_pro_pic(request):
+    form = ProfilePic(instance = request.user.user_profile)
+
+    if request.method == 'POST':
+        form = ProfilePic(request.POST, request.FILES,instance = request.user.user_profile)
+        if form.is_valid():
+            form.save()
+            messages.success(request,'Profile Pic updated successfully!')
+            return redirect('profile')
+    data = {
+        'form': form,
+    }
+    return render(request,'login/add_pro_pic.html',data)
