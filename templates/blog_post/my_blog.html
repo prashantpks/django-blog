@@ -6,6 +6,7 @@
 <section class="featured-posts no-padding-top">
     <div class="container">
       <!-- Post-->
+      {% if user.post_author.all %}
       {% for blog in user.post_author.all %}
       <div class="row d-flex align-items-stretch">
         <div class="text col-lg-7">
@@ -40,6 +41,9 @@
         <div class="image col-lg-5"><img src="{{ blog.blog_image.url }}" alt="..."></div>
       </div>
       {% endfor %}
+      {% else %}
+      <h3> No Posts Yet!</h3>
+      {% endif %}
     </div>
   </section>
   

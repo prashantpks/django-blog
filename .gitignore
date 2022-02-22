@@ -133,6 +133,9 @@ venv.bak/
 # mkdocs documentation
 /site
 
+#Env file
+env
+
 # mypy
 .mypy_cache/
 .dmypy.json
@@ -144,4 +147,5 @@ dmypy.json
 
 # media file
 /media
+
 # End of https://www.gitignore.io/api/django
