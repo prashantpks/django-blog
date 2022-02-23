@@ -44,12 +44,18 @@ def signup(request):
                     return redirect('signup')
                 else:
                     user = User.objects.create_user(first_name =firstname, last_name = lastname, email = email, username = username, password = password)
+                    pic = ProfilePic();
+                    user.save()
+                    # Add default profile pic to user account
+                    profilePic = pic.save(commit = False)
+                    profilePic.user = user
+                    profilePic.save()
                     auth.login(request,user)
                     messages.success(request,'You are now logged in!')
                     return redirect('home')
                     # if want to redirect to login page after registration
                     '''
-                    user.save()
+                    
                     messages.success(request,'You are registered successfully')
                     return redirect('login')
                     '''
@@ -116,6 +122,8 @@ def add_pro_pic(request):
 
     if request.method == 'POST':
         form = ProfilePic(request.POST, request.FILES)
+        print(form.POST);
+        print(request.FILES);
         if form.is_valid():
             user_obj = form.save(commit=False)
             user_obj.user = request.user
