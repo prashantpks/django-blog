@@ -1,17 +1,29 @@
-# django-blog
-Practice project of CRUD operation in django
+# Django Blog Application
 
-## Features included
-* Use of Django class based generic views
-* CRUD operations involved updating and creating blog
-* Django authentication for Login / Signup
-* Comment feature in blog 
-* User Profile with image
-* Change Password feature
-* Use of django-crispy-forms
-* Handling static files and Adding Image field
-* Use of Bootstrap4 for frontend
+A Django based Web Application
+<img src = "./blogHome.jpg" alt = "blogHomeImage">
 
-This project was mainly to learn CRUD operations in django and involved more of backend part rather than frontend.
-This was created to brush-up my django abilities and hoping to know this framework better.
+## Introduction
+This is the web application made using Django. It is blogging site which enables its users to read and create blogs.
+
+## Key Features
+* Use of django-authentication for user login.
+* User can create, read, update or delete their blogs.
+* Users can post comments on blogs.
+* Used Bootstrap Template in the frontend
+* Handled media files so that user can upload their profile pic as well as add image in blog.
+
+## Technologies Used
+
+* Django (backend)
+* Bootstrap template (frontend)
+* SQLite (database)
+
+## Demo Video
+<img src = "./blogDemo.gif" alt = "blogDemoGIF">
+
+## Author
+* LinkedIn: [@Prashant Kumar](https://www.linkedin.com/in/prashant-kumar-7aa9a4203/)
+* Email: [@prashant](mailto:prashantrkt2002@gmail.com)
+* Github: [@prashantpks](https://github.com/prashantpks/)
 
