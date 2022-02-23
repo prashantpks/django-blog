@@ -1,7 +1,7 @@
 # Django Blog Application
 
 A Django based Web Application
-<img src = "./blogHome.jpg" alt = "blogHomeImage">
+<img src = "./blogHome.png" alt = "blogHomeImage">
 
 ## Introduction
 This is the web application made using Django. It is blogging site which enables its users to read and create blogs.
